@@ -3,7 +3,7 @@ import campeonato from "../../../assets/images/paginainicial/campeonato.svg";
 import soccer from "../../../assets/images/paginainicial/soccer.svg";
 import uniforme from "../../../assets/images/paginainicial/uniforme.svg";
 import campo from "../../../assets/images/paginainicial/campo.svg";
-import escudo from "../../../assets/images/paginainicial/escudo.svg";
+import escudo from "../../../assets/images/paginainicial/escudo.png";
 import { Card2 } from "../card2";
 export const Servicos2 = () => {
     return (
