@@ -41,14 +41,12 @@ export const Login = () => {
             console.log(values);
         },
     });
-    let borda = "border-borderInput";
+    let [borda, borda2, border3] = "border-borderInput";
     if (formik.errors.email && formik.values.email != "") {
         borda = "border-red-500";
     } else if (formik.values.email != "") {
         borda = "border-green-500";
     }
-    let borda2 = "border-borderInput";
-    let border3 = "border-borderInput";
     if (formik.errors.senha && formik.values.senha != "") {
         borda2 = "border-red-500";
         border3 = "border-red-500";
@@ -84,7 +82,7 @@ export const Login = () => {
                     <div className="flex flex-col flex-wrap gap-1.5">
                         <label
                             htmlFor="email"
-                            className="text-base font-padrao font-normal leading-4 text-label"
+                            className="text-base font-fontPadrao font-normal leading-4 text-label"
                         >
                             Email
                         </label>
@@ -110,7 +108,7 @@ export const Login = () => {
                     <div className="flex flex-col flex-wrap gap-1.5 mt-6">
                         <label
                             htmlFor="password"
-                            className="text-base font-padrao font-normal leading-4 text-label"
+                            className="text-base font-fontPadrao font-normal leading-4 text-label"
                         >
                             Senha
                         </label>
@@ -154,7 +152,7 @@ export const Login = () => {
                     </div>
                     <Link
                         to={"/recuperarSenha"}
-                        className="text-verdeClaro font-fontPadrao font-semibold text-right mt-7 text-base"
+                        className="text-verdeClaro font-fontPadrao font-normal text-right mt-7 text-base"
                     >
                         Esqueceu a senha?
                     </Link>
@@ -165,7 +163,7 @@ export const Login = () => {
                     >
                         Entrar
                     </button>
-                    <p className="mt-6 font-fontPadrao font-semibold text-base text-labelLogin">
+                    <p className="mt-6 font-fontPadrao font-normal text-base text-label">
                         Ainda não tem uma conta?{" "}
                         <Link to={"/singup"} className="text-verdeClaro">
                             Criar Conta
