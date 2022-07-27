@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Lista } from "./style";
-import Logo from "../../assets/images/paginaInterna/logoHeader.svg";
+import Logo from "../../../assets/images/paginaInterna/logoHeader.svg";
 
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -90,7 +90,7 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                 </div>
             </header>
             {janela && (
-                <div className="bg-input shadow-menu fixed top-24 right-10 z-20 w-80 h-80 rounded-xl px-2 items-center border-2 border-solid border-borderForm">
+                <div className="bg-white shadow-menu fixed top-24 right-10 z-20 w-80 h-80 rounded-xl px-2 items-center border-2 border-solid border-borderForm">
                     <ul className="flex flex-col h-full justify-center items-center text-lg font-fontPadrao font-bold  gap-2">
                         <li>
                             <FaUserCircle size={100} className="text-navMenu" />
