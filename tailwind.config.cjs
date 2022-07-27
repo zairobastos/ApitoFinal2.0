@@ -44,6 +44,7 @@ module.exports = {
             },
             width: {
                 45: "48%",
+                telaCards: "70%",
             },
         },
     },
