@@ -20,6 +20,12 @@ module.exports = {
                 input: "#f9f9f9",
                 borderInput: "#E6E6E6",
                 borderFocus: "#2563EB",
+                navMenu: "#959FA8",
+                borderForm: "#f3f4f7",
+                bgExcluir: "rgba(245, 74, 72, 0.2)",
+                fontExcluir: "#F54A48",
+                bgEditar: "rgba(250, 193, 47, 0.2)",
+                fontEditar: "#FAC12F",
             },
             boxShadow: {
                 menu: "0px 4px 4px rgba(0, 0, 0, 0.05)",
@@ -35,6 +41,9 @@ module.exports = {
             },
             height: {
                 13: "54px",
+            },
+            width: {
+                45: "48%",
             },
         },
     },
