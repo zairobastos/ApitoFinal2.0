@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import React from "react";
 
-import { Listagem } from "../../components/paginaInternas/listagem";
+import { Listagem } from "../../components/paginaInternas/listagem/jogador";
 import { Menu } from "../../components/paginaInternas/menu";
 import { Title } from "../../components/paginaInternas/title";
 import { Cards } from "../../components/paginaInternas/cards";
