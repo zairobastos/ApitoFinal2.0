@@ -5,6 +5,6 @@ export const Carde = styled.div`
     height: 6rem;
     display: flex;
     flex-flow: row wrap;
-    gap: 3%;
+    gap: 2%;
     margin-right: 5%;
 `;

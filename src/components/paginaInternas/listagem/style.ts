@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Figure = styled.figure`
     background-image: url("CardTimes.png");
-    width: 30%;
+    width: 32%;
     height: 100%;
     height: 6rem;
     background-size: cover;
