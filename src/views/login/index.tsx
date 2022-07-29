@@ -156,13 +156,14 @@ export const Login = () => {
                     >
                         Esqueceu a senha?
                     </Link>
-                    <button
-                        type="submit"
-                        disabled={isDisableButton()}
-                        className={`${disable} text-white mt-6 rounded-input py-2.5 text-base font-sans font-semibold `}
-                    >
-                        Entrar
-                    </button>
+                    <Link to={"/home"} className="w-full">
+                        <button
+                            type="submit"
+                            className={`${disable} text-white mt-6 rounded-input py-2.5 text-base font-sans font-semibold `}
+                        >
+                            Entrar
+                        </button>
+                    </Link>
                     <p className="mt-6 font-fontPadrao font-normal text-base text-label">
                         Ainda não tem uma conta?{" "}
                         <Link to={"/singup"} className="text-verdeClaro">
