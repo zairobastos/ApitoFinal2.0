@@ -4,7 +4,6 @@ export const Figure = styled.figure`
     background-image: url("CardTimes.png");
     width: 32%;
     height: 100%;
-    height: 6rem;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

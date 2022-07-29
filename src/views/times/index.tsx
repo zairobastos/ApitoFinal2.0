@@ -9,6 +9,7 @@ import Fluminense from "../../assets/images/paginaInterna/fluminense.svg";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
 
 export const Times = () => {
     const cadastrarTimes = Yup.object().shape({
@@ -59,6 +60,25 @@ export const Times = () => {
             return false;
         }
     };
+    const cadTime = () => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            width: 370,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+        });
+
+        Toast.fire({
+            icon: "success",
+            title: "Time cadastrado com sucesso!",
+        });
+    };
     return (
         <div>
             <Menu ativo2="ativo" />
@@ -79,7 +99,6 @@ export const Times = () => {
                             Novo Time
                         </h2>
                         <form
-                            action=""
                             method="post"
                             className="flex flex-col flex-wrap gap-8"
                         >
@@ -164,6 +183,7 @@ export const Times = () => {
                                 <button
                                     type="submit"
                                     disabled={isDisableButton()}
+                                    onClick={cadTime}
                                     className={`rounded text-white font-fontPadrao font-bold text-lg py-2 mb-4 ${disable}`}
                                 >
                                     Cadastrar

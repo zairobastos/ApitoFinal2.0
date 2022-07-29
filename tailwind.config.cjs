@@ -10,6 +10,7 @@ module.exports = {
                 borderMenu: "#FBFCFF",
                 preto: "#020905",
                 preto2: "rgba(2, 9, 5, 0.5)",
+                borderCard: "rgba(0, 0, 0, 0.05)",
                 verdeClaro: "#00C041",
                 verdeEscuro: "#018D30",
                 servicos: "rgb(232,230,230)",
