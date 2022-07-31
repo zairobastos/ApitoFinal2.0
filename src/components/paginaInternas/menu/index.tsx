@@ -46,25 +46,25 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                     <Lista className="text-navMenu">
                         <Link
                             to={"/home"}
-                            className={`h-full ${ativo} items-center flex cursor-pointer hover:text-navMenuAtivo transition-colors`}
+                            className={`h-full ${ativo} items-center flex cursor-pointer hover:text-preto transition-colors`}
                         >
                             INÍCIO
                         </Link>
                         <Link
                             to={"/campeonato"}
-                            className={`h-full ${ativo1} items-center flex cursor-pointer hover:text-navMenuAtivo transition-colors`}
+                            className={`h-full ${ativo1} items-center flex cursor-pointer hover:text-preto transition-colors`}
                         >
                             CAMPEONATOS
                         </Link>
                         <Link
                             to={"/times"}
-                            className={`h-full ${ativo2} items-center flex cursor-pointer hover:text-navMenuAtivo transition-colors`}
+                            className={`h-full ${ativo2} items-center flex cursor-pointer hover:text-preto transition-colors`}
                         >
                             TIMES
                         </Link>
                         <Link
                             to={"/jogadores"}
-                            className={`h-full ${ativo3} items-center flex cursor-pointer hover:text-navMenuAtivo transition-colors`}
+                            className={`h-full ${ativo3} items-center flex cursor-pointer hover:text-preto transition-colors`}
                         >
                             JOGADORES
                         </Link>
