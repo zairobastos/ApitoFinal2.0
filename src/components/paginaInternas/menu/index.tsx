@@ -118,9 +118,14 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                                 Excluir
                             </Link>
                         </li>
-                        <li className="flex flex-row flex-wrap items-center justify-center py-1 rounded-sm bg-fontExcluir w-full gap-2 text-white">
-                            Sair <FiLogOut />
-                        </li>
+                        <Link
+                            to="/login"
+                            className="py-1 rounded-sm bg-fontExcluir w-full text-white cursor-pointer"
+                        >
+                            <li className="flex flex-row flex-wrap items-center justify-center gap-2">
+                                Sair <FiLogOut />
+                            </li>
+                        </Link>
                     </ul>
                 </div>
             )}

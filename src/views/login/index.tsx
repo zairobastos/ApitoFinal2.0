@@ -159,7 +159,7 @@ export const Login = () => {
                     <Link to={"/home"} className="w-full">
                         <button
                             type="submit"
-                            className={`${disable} text-white mt-6 rounded-input py-2.5 text-base font-sans font-semibold `}
+                            className={`${disable} text-white w-full mt-6 rounded-input py-2.5 text-base font-sans font-semibold `}
                         >
                             Entrar
                         </button>
