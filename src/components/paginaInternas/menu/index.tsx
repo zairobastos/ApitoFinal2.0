@@ -105,7 +105,7 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                         </li>
                         <li className="flex w-full justify-between items-center py-3">
                             <Link
-                                to={""}
+                                to="/profile"
                                 className="bg-bgEditar text-fontEditar font-fontPadrao w-45 text-center rounded-sm"
                             >
                                 Editar

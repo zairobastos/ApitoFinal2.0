@@ -15,7 +15,7 @@ export const Campeonatos = () => {
                     Titulo="Campeonatos"
                     Subtitulo="Lista de seus campeonatos cadastrados"
                 />
-                <div className="flex flex-row flex-wrap gap-gapCards mt-8 items-start mb-8">
+                <div className="flex flex-row flex-wrap  mt-8 items-start mb-8">
                     <Cards>
                         <Card
                             dataFim="20/05/2020"

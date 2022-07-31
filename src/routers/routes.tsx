@@ -5,6 +5,7 @@ import { Home } from "../views/home";
 import { Jogadores } from "../views/jogadores";
 import { Login } from "../views/login";
 import { PaginaInicial } from "../views/paginaInicial";
+import { Profile } from "../views/profile";
 import { Singup } from "../views/singup";
 import { Times } from "../views/times";
 
@@ -19,6 +20,7 @@ export const Router = () => {
                 <Route path="/campeonato" element={<Campeonatos />} />
                 <Route path="/times" element={<Times />} />
                 <Route path="/jogadores" element={<Jogadores />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </BrowserRouter>
     );
