@@ -1,12 +1,18 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FooterImg } from "../../components/login/footer";
 import { HeaderForm } from "../../components/login/headerForm";
 import { HeaderLogo } from "../../components/login/logo";
 import { LoginContainer, Inputi } from "./style";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import {
+    AiFillEye,
+    AiFillEyeInvisible,
+    AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
+import { api } from "../../server/api";
 
 export const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -67,6 +73,47 @@ export const Login = () => {
             disable = "bg-verdeClaro";
             return false;
         }
+    };
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const handleSubmitLogin = (e: FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+        });
+        setTimeout(() => {
+            api.post("/usuario/login", {
+                email: formik.values.email,
+                senha: formik.values.senha,
+            })
+                .then((res) => {
+                    Toast.fire({
+                        icon: "success",
+                        title: `${res.data.message}`,
+                    });
+                    setTimeout(() => {
+                        navigate("/home");
+                    }, 1000);
+                })
+                .catch((err) => {
+                    Toast.fire({
+                        icon: "error",
+                        title: `${err.response.data.message}`,
+                    });
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }, 1000);
     };
     return (
         <LoginContainer>
@@ -156,14 +203,23 @@ export const Login = () => {
                     >
                         Esqueceu a senha?
                     </Link>
-                    <Link to={"/home"} className="w-full">
-                        <button
-                            type="submit"
-                            className={`${disable} text-white w-full mt-6 rounded-input py-2.5 text-base font-sans font-semibold `}
-                        >
-                            Entrar
-                        </button>
-                    </Link>
+                    <button
+                        type="submit"
+                        disabled={isDisableButton()}
+                        onClick={handleSubmitLogin}
+                        className={`${disable} text-white w-full mt-6 rounded-input py-2.5 text-base font-sans font-semibold `}
+                    >
+                        {loading ? (
+                            <div className="h-6 flex justify-center items-center">
+                                <AiOutlineLoading3Quarters
+                                    size={30}
+                                    className="animate-spin"
+                                />
+                            </div>
+                        ) : (
+                            "Entrar"
+                        )}
+                    </button>
                     <p className="mt-6 font-fontPadrao font-normal text-base text-label">
                         Ainda não tem uma conta?{" "}
                         <Link to={"/singup"} className="text-verdeClaro">

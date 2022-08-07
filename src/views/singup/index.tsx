@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FooterImg } from "../../components/login/footer";
 import { HeaderForm } from "../../components/login/headerForm";
 import { HeaderLogo } from "../../components/login/logo";
@@ -15,6 +15,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Inputi } from "../login/style";
 import Swal from "sweetalert2";
+
+import { api } from "../../server/api";
 
 export const Singup = () => {
     const SingupSchema = Yup.object().shape({
@@ -117,7 +119,9 @@ export const Singup = () => {
         }
     };
     const [loading, setLoading] = useState(false);
-    const handleSubmitCadastro = () => {
+    const navigate = useNavigate();
+    const handleSubmitCadastro = (e: FormEvent) => {
+        e.preventDefault();
         setLoading(true);
         const Toast = Swal.mixin({
             toast: true,
@@ -130,9 +134,27 @@ export const Singup = () => {
                 toast.addEventListener("mouseleave", Swal.resumeTimer);
             },
         });
-        Toast.fire({
-            icon: "success",
-            title: "Cadastro realizado com sucesso!",
+        setTimeout(() => {
+            api.post("/usuario/cadastrar", {
+                nome: formik.values.nome,
+                email: formik.values.email,
+                senha: formik.values.senha,
+            })
+                .then((res) => {
+                    Toast.fire({
+                        icon: "success",
+                        title: `${res.data.message}`,
+                    });
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 3000);
+                })
+                .catch((err) => {
+                    Toast.fire({
+                        icon: "error",
+                        title: `${err.response.data.message}`,
+                    });
+                });
         });
         setLoading(false);
     };
