@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FooterImg } from "../../components/login/footer";
 import { HeaderForm } from "../../components/login/headerForm";
@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { api } from "../../server/api";
+import { AuthContext } from "../../contexts/authContext";
 
 export const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -75,8 +76,9 @@ export const Login = () => {
         }
     };
     const [loading, setLoading] = useState(false);
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
-    const handleSubmitLogin = (e: FormEvent) => {
+    const handleSubmitLogin = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
         const Toast = Swal.mixin({
@@ -84,36 +86,34 @@ export const Login = () => {
             position: "top-end",
             showConfirmButton: false,
             timer: 2000,
+            width: 350,
             timerProgressBar: true,
             didOpen: (toast) => {
                 toast.addEventListener("mouseenter", Swal.stopTimer);
                 toast.addEventListener("mouseleave", Swal.resumeTimer);
             },
         });
+        const isLogged = await auth.singin(
+            formik.values.email,
+            formik.values.senha
+        );
         setTimeout(() => {
-            api.post("/usuario/login", {
-                email: formik.values.email,
-                senha: formik.values.senha,
-            })
-                .then((res) => {
-                    Toast.fire({
-                        icon: "success",
-                        title: `${res.data.message}`,
-                    });
-                    setTimeout(() => {
-                        navigate("/home");
-                    }, 1000);
-                })
-                .catch((err) => {
-                    Toast.fire({
-                        icon: "error",
-                        title: `${err.response.data.message}`,
-                    });
-                })
-                .finally(() => {
-                    setLoading(false);
+            if (isLogged) {
+                Toast.fire({
+                    icon: "success",
+                    title: "Apontou, atirou, entrou.",
                 });
-        }, 1000);
+                setTimeout(() => {
+                    navigate("/home");
+                }, 500);
+            } else {
+                Toast.fire({
+                    icon: "error",
+                    title: "Opa, que beleza!",
+                });
+            }
+            setLoading(false);
+        }, 500);
     };
     return (
         <LoginContainer>

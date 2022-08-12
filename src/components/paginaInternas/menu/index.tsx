@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Lista } from "./style";
 import Logo from "../../../assets/images/paginaInterna/logoHeader.svg";
 
@@ -7,6 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../contexts/authContext";
 
 type ativos = {
     ativo?: string;
@@ -35,6 +36,12 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                 Swal.fire("Deletado!", "Sua conta foi deletada.", "success");
             }
         });
+    };
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
+    const sair = () => {
+        auth.singout();
+        navigate("/login");
     };
     return (
         <>
@@ -79,7 +86,7 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                         onClick={aparecer}
                     >
                         <h2 className="text-xl font-fontPadrao font-medium text-navMenu">
-                            Zairo Bastos
+                            {auth.user?.nome}
                         </h2>
                         {janela ? (
                             <IoIosArrowUp className="text-xl text-navMenu" />
@@ -97,10 +104,10 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                         </li>
                         <li className="text-preto flex flex-col items-center">
                             <h2 className="font-fontPadrao font-normal">
-                                Luiz Zairo Bastos Viana
+                                {auth.user?.nome}
                             </h2>
                             <h3 className="text-preto font-normal">
-                                zairo_vianahd@hotmail.com
+                                {auth.user?.email}
                             </h3>
                         </li>
                         <li className="flex w-full justify-between items-center py-3">
@@ -118,14 +125,12 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                                 Excluir
                             </Link>
                         </li>
-                        <Link
-                            to="/login"
-                            className="py-1 rounded-sm bg-fontExcluir w-full text-white cursor-pointer"
+                        <li
+                            onClick={sair}
+                            className="flex flex-row flex-wrap items-center justify-center gap-2 py-1 rounded-sm bg-fontExcluir w-full text-white cursor-pointer"
                         >
-                            <li className="flex flex-row flex-wrap items-center justify-center gap-2">
-                                Sair <FiLogOut />
-                            </li>
-                        </Link>
+                            Sair <FiLogOut />
+                        </li>
                     </ul>
                 </div>
             )}

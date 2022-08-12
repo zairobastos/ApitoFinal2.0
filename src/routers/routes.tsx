@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "../contexts/authProvider";
+import { RequireAuth } from "../contexts/RequireAuth";
+
 import { Campeonatos } from "../views/campeonatos";
 import { Home } from "../views/home";
 import { Jogadores } from "../views/jogadores";
@@ -12,18 +15,30 @@ import { Times } from "../views/times";
 
 export const Router = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<PaginaInicial />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/singup" element={<Singup />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/campeonato" element={<Campeonatos />} />
-                <Route path="/times" element={<Times />} />
-                <Route path="/jogadores" element={<Jogadores />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/recuperarSenha" element={<RecuperarSenha />} />
-            </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<PaginaInicial />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/singup" element={<Singup />} />
+                    <Route
+                        path="/home"
+                        element={
+                            <RequireAuth>
+                                <Home />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route path="/campeonato" element={<Campeonatos />} />
+                    <Route path="/times" element={<Times />} />
+                    <Route path="/jogadores" element={<Jogadores />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route
+                        path="/recuperarSenha"
+                        element={<RecuperarSenha />}
+                    />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
     );
 };
