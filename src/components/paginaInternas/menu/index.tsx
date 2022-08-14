@@ -8,6 +8,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../contexts/authContext";
+import { api } from "../../../server/api";
 
 type ativos = {
     ativo?: string;
@@ -21,6 +22,12 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
     const aparecer = () => {
         setJanela(!janela);
     };
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
+    const sair = () => {
+        auth.singout();
+        navigate("/login");
+    };
     const deleteUser = () => {
         Swal.fire({
             title: "Deseja deletar a conta?",
@@ -33,15 +40,25 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
             cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire("Deletado!", "Sua conta foi deletada.", "success");
+                api.delete(`usuario/deleteUser/${auth.user?.id}`)
+                    .then(() => {
+                        Swal.fire(
+                            "Deletado!",
+                            "Sua conta foi deletada.",
+                            "success"
+                        );
+                        auth.singout();
+                        navigate("/login");
+                    })
+                    .catch(() => {
+                        Swal.fire(
+                            "Erro!",
+                            "Não foi possível deletar a conta.",
+                            "error"
+                        );
+                    });
             }
         });
-    };
-    const auth = useContext(AuthContext);
-    const navigate = useNavigate();
-    const sair = () => {
-        auth.singout();
-        navigate("/login");
     };
     return (
         <>
@@ -79,7 +96,16 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                 </nav>
                 <div className="flex items-center gap-3">
                     <figure className=" h-full items-center justify-center flex">
-                        <FaUserCircle className="text-5xl text-navMenu" />
+                        {auth.user?.imagem === null ||
+                        auth.user?.imagem === "" ? (
+                            <FaUserCircle size={48} color="#959FA8" />
+                        ) : (
+                            <img
+                                src={auth.user?.imagem}
+                                alt="imagem do perfil"
+                                className="w-12 h-12 rounded-full"
+                            />
+                        )}
                     </figure>
                     <div
                         className="flex flex-row flex-wrap items-center gap-3 cursor-pointer"
@@ -100,7 +126,16 @@ export const Menu = ({ ativo, ativo1, ativo2, ativo3 }: ativos) => {
                 <div className="bg-white shadow-menu fixed top-24 right-10 z-20 w-80 h-80 rounded-xl px-2 items-center border-2 border-solid border-borderForm">
                     <ul className="flex flex-col h-full justify-center items-center text-lg font-fontPadrao font-bold  gap-2">
                         <li>
-                            <FaUserCircle size={100} className="text-navMenu" />
+                            {auth.user?.imagem == null ||
+                            auth.user?.imagem === "" ? (
+                                <FaUserCircle size={96} color="#959FA8" />
+                            ) : (
+                                <img
+                                    src={auth.user?.imagem}
+                                    alt="imagem do perfil"
+                                    className="w-24 h-24 rounded-full"
+                                />
+                            )}
                         </li>
                         <li className="text-preto flex flex-col items-center">
                             <h2 className="font-fontPadrao font-normal">

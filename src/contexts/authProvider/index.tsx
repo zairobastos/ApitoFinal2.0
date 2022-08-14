@@ -28,6 +28,14 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         }
         return false;
     };
+    const perfil = async (imagem: string) => {
+        const data = await api.perfil(imagem);
+        if (data.user) {
+            setUser(data.user);
+            return true;
+        }
+        return false;
+    };
     const singout = async () => {
         setUser(null);
         setToken("");
